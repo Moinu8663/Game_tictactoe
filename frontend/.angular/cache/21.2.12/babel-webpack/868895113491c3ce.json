@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: false,\n  apiBaseUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/api',\n  signalRHubUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/gamehub'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

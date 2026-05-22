@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://localhost:51781/api',
-  signalRHubUrl: 'https://localhost:51781/gamehub'
+  apiBaseUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/api',
+  signalRHubUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/gamehub'
 };
