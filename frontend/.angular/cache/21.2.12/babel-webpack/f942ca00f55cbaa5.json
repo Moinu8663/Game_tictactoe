@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const environment = {\n  production: false,\n  signalRHubUrl: 'https://localhost:5001/gamehub'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
