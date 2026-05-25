@@ -23,6 +23,7 @@ export class Singleuser {
   playerXScore = 0;
   playerOScore = 0;
   draws = 0;
+  showWinnerPopup = false;
 
   readonly winningLines = [
     [0, 1, 2],
@@ -74,11 +75,16 @@ export class Singleuser {
     this.finishTurn();
   }
 
+  closeWinnerPopup(): void {
+    this.showWinnerPopup = false;
+  }
+
   restartGame(): void {
     this.board = Array(9).fill(null);
     this.currentTurn = 'X';
     this.winner = '';
     this.gameOver = false;
+    this.showWinnerPopup = false;
   }
 
   resetScore(): void {
@@ -104,6 +110,7 @@ export class Singleuser {
       this.winner = winner;
       this.gameOver = true;
       this.updateScore(winner);
+      this.showWinnerPopup = true;
       return;
     }
 
@@ -111,6 +118,7 @@ export class Singleuser {
       this.winner = 'Draw';
       this.gameOver = true;
       this.draws++;
+      this.showWinnerPopup = true;
       return;
     }
 

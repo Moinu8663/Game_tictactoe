@@ -19,6 +19,7 @@ export class Comuser implements OnDestroy {
   playerScore = 0;
   computerScore = 0;
   draws = 0;
+  showWinnerPopup = false;
   private computerTimer: number | null = null;
 
   readonly playerMark: Mark = 'X';
@@ -86,6 +87,7 @@ export class Comuser implements OnDestroy {
     this.currentTurn = this.playerMark;
     this.winner = '';
     this.gameOver = false;
+    this.showWinnerPopup = false;
     this.cdr.markForCheck();
   }
 
@@ -133,7 +135,7 @@ export class Comuser implements OnDestroy {
     if (this.emptyCells.length === 0) {
       this.winner = 'Draw';
       this.gameOver = true;
-      this.draws++;
+      this.updateDrawScore();
       return;
     }
 
@@ -176,12 +178,22 @@ export class Comuser implements OnDestroy {
     return null;
   }
 
+  closeWinnerPopup(): void {
+    this.showWinnerPopup = false;
+  }
+
   private updateScore(winner: string): void {
     if (winner === this.playerMark) {
       this.playerScore++;
     } else if (winner === this.computerMark) {
       this.computerScore++;
     }
+    this.showWinnerPopup = true;
+  }
+
+  private updateDrawScore(): void {
+    this.draws++;
+    this.showWinnerPopup = true;
   }
 
 }

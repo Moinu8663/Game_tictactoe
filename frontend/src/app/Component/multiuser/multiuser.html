@@ -9,7 +9,6 @@
     </header>
 
     <section class="lobby-form" aria-label="Room setup">
-
       <label>
         <span>Player name</span>
         <input type="text" [(ngModel)]="playerName" placeholder="Enter your name" />
@@ -83,11 +82,30 @@
 
   <div class="winner-overlay" *ngIf="showWinnerPopup">
     <div class="winner-modal">
-      <h2>{{ winner === 'Draw' ? 'Draw' : winner + ' Wins' }}</h2>
-      <p>{{ winner === 'Draw' ? 'No spaces left.' : winner + ' takes the board.' }}</p>
-      <div class="modal-actions">
-        <button type="button" class="secondary" (click)="closeWinnerPopup()">Close</button>
-        <button type="button" (click)="restartGame()">Play Again</button>
+      <div class="winner-modal-top">
+        <div class="winner-emoji">{{ winner === 'Draw' ? '🤝' : (winner === symbol ? '🏆' : '😔') }}</div>
+        <h2>{{ winner === 'Draw' ? 'It\'s a Draw!' : (winner === symbol ? 'You Win!' : 'You Lose!') }}</h2>
+        <p class="winner-modal-sub">{{ winner === 'Draw' ? 'No spaces left — well played.' : (winner === symbol ? winner + ' takes the board!' : winner + ' wins this round.') }}</p>
+      </div>
+      <div class="winner-modal-bottom">
+        <div class="winner-score-row">
+          <div class="winner-score-item">
+            <span class="winner-score-label">{{ playerX || 'Player X' }}</span>
+            <span class="winner-score-value">X</span>
+          </div>
+          <div class="winner-score-item">
+            <span class="winner-score-label">Room</span>
+            <span class="winner-score-value" style="font-size:0.9rem">{{ roomId }}</span>
+          </div>
+          <div class="winner-score-item">
+            <span class="winner-score-label">{{ playerO || 'Player O' }}</span>
+            <span class="winner-score-value">O</span>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="ghost" (click)="closeWinnerPopup()">Close</button>
+          <button type="button" (click)="restartGame()">Play Again</button>
+        </div>
       </div>
     </div>
   </div>

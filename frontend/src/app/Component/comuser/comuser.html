@@ -49,4 +49,34 @@
       <span>{{ gameOver ? 'Game complete' : 'Match in progress' }}</span>
     </footer>
   </section>
+
+  <div class="winner-overlay" *ngIf="showWinnerPopup">
+    <div class="winner-modal">
+      <div class="winner-modal-top">
+        <div class="winner-emoji">{{ winner === 'Draw' ? '🤝' : '🏆' }}</div>
+        <h2>{{ winner === 'Draw' ? 'It\'s a Draw!' : (winner === playerMark ? 'You Win!' : 'Computer Wins!') }}</h2>
+        <p class="winner-modal-sub">{{ winner === 'Draw' ? 'No spaces left — well played.' : (winner === playerMark ? 'Excellent move — you beat the AI.' : 'The computer outplayed you this time.') }}</p>
+      </div>
+      <div class="winner-modal-bottom">
+        <div class="winner-score-row">
+          <div class="winner-score-item">
+            <span class="winner-score-label">You</span>
+            <span class="winner-score-value">{{ playerScore }}</span>
+          </div>
+          <div class="winner-score-item">
+            <span class="winner-score-label">Draws</span>
+            <span class="winner-score-value">{{ draws }}</span>
+          </div>
+          <div class="winner-score-item">
+            <span class="winner-score-label">Computer</span>
+            <span class="winner-score-value">{{ computerScore }}</span>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="ghost" (click)="closeWinnerPopup()">Close</button>
+          <button type="button" (click)="restartGame()">Play Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

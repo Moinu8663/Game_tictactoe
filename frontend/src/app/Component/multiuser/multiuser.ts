@@ -182,6 +182,7 @@ export class Multiuser implements OnInit, OnDestroy {
         this.lastEvent = 'GameRestarted';
         this.lastEventTurn = room.currentTurn;
         this.updateRoom(room);
+        this.showWinnerPopup = false;
         this.statusMessage = `${this.symbol === 'X' ? 'You are X.' : 'You are O.'} Game restarted.`;
         this.cdr.markForCheck();
       })
