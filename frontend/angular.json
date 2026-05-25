@@ -19,7 +19,8 @@
             "assets": [
               "src/favicon.ico",
               "src/staticwebapp.config.json",
-              "src/assets"
+              "src/assets",
+              "src/ads.txt"
             ],
             "styles": [
               "src/styles.css"
