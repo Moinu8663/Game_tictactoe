@@ -9,13 +9,16 @@ builder.Services.AddSingleton<GameService>();
 
 var allowedOrigins = builder.Configuration["AllowedOrigins"]?
     .Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-    ?? ["http://localhost:4200"];
+    ?? [
+        "http://localhost:4200",
+        "https://brave-beach-0543e7010.7.azurestaticapps.net"
+    ];
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.WithOrigins("https://brave-beach-0543e7010.7.azurestaticapps.net/", "http://localhost:4200")
+        policy.WithOrigins(allowedOrigins)
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

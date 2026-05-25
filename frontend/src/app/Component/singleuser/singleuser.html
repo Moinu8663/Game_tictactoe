@@ -1,0 +1,79 @@
+<main class="game-shell">
+  <section class="game-card lobby-card" *ngIf="!started">
+    <header class="lobby-header">
+      <p class="eyebrow">Offline Match</p>
+      <h1>Enter Player Names</h1>
+      <span class="connection-pill">2 Players</span>
+    </header>
+
+    <section class="lobby-form" aria-label="Player setup">
+      <label>
+        <span>Player X name</span>
+        <input type="text" [(ngModel)]="playerXName" placeholder="Enter player X name" />
+      </label>
+
+      <label>
+        <span>Player O name</span>
+        <input type="text" [(ngModel)]="playerOName" placeholder="Enter player O name" />
+      </label>
+
+      <div class="create-panel">
+        <button type="button" (click)="startGame()" [disabled]="!canStartGame">Start Game</button>
+        <button type="button" class="ghost" routerLink="/game-dashboard">Dashboard</button>
+      </div>
+    </section>
+
+    <p class="lobby-status">Both names are required before the match starts.</p>
+  </section>
+
+  <section class="game-card board-card" *ngIf="started">
+    <header class="game-header">
+      <div class="header-actions">
+        <button type="button" class="ghost" routerLink="/game-dashboard">Dashboard</button>
+        <button type="button" class="secondary" (click)="editPlayers()">Players</button>
+      </div>
+
+      <div class="match-state">
+        <span>{{ statusMessage }}</span>
+        <strong>{{ getPlayerName('X') }} vs {{ getPlayerName('O') }}</strong>
+      </div>
+
+      <button type="button" (click)="restartGame()">New Game</button>
+    </header>
+
+    <section class="board-arena" aria-label="Offline game board">
+      <article class="corner-player player-x" [class.active]="currentTurn === 'X' && !gameOver">
+        <span class="mark x">X</span>
+        <div>
+          <strong>{{ getPlayerName('X') }}</strong>
+          <p>Score {{ playerXScore }}</p>
+        </div>
+      </article>
+
+      <article class="corner-player player-o" [class.active]="currentTurn === 'O' && !gameOver">
+        <span class="mark o">O</span>
+        <div>
+          <strong>{{ getPlayerName('O') }}</strong>
+          <p>Score {{ playerOScore }}</p>
+        </div>
+      </article>
+
+      <div class="board" aria-label="Tic tac toe board">
+        <button
+          *ngFor="let cell of board; let i = index; trackBy: trackCell"
+          type="button"
+          class="cell"
+          [ngClass]="{ 'x-mark': cell === 'X', 'o-mark': cell === 'O' }"
+          [disabled]="!!cell || gameOver"
+          (click)="move(i)">
+          <span>{{ cell || '' }}</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="room-footer">
+      <span>Draws {{ draws }}</span>
+      <span>{{ gameOver ? 'Game complete' : 'Pass the screen after each move' }}</span>
+    </footer>
+  </section>
+</main>

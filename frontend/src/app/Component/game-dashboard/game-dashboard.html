@@ -1,0 +1,30 @@
+<main class="dashboard-shell">
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">Choose Game Type</p>
+      <h1>Game Dashboard</h1>
+    </div>
+
+    <a class="home-button" routerLink="/home">Home</a>
+  </header>
+
+  <section class="mode-grid" aria-label="Game modes">
+    <a class="mode-card online" routerLink="/multiuser">
+      <span class="mode-icon">ON</span>
+      <strong>Online With Friend</strong>
+      <p>Create or join a room and play with a friend over the network.</p>
+    </a>
+
+    <a class="mode-card computer" routerLink="/comuser">
+      <span class="mode-icon">AI</span>
+      <strong>With Computer</strong>
+      <p>Play against the computer for a quick solo challenge.</p>
+    </a>
+
+    <a class="mode-card offline" routerLink="/singleuser">
+      <span class="mode-icon">2P</span>
+      <strong>Offline With Friend</strong>
+      <p>Share the same screen and take turns locally.</p>
+    </a>
+  </section>
+</main>

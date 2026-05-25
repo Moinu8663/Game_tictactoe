@@ -1,0 +1,52 @@
+<main class="game-shell">
+  <section class="game-card board-card">
+    <header class="game-header">
+      <div class="header-actions">
+        <button type="button" class="ghost" routerLink="/game-dashboard">Dashboard</button>
+        <button type="button" class="secondary" (click)="resetScore()">Reset Score</button>
+      </div>
+
+      <div class="match-state">
+        <span>{{ statusMessage }}</span>
+        <strong>You are X. Computer is O.</strong>
+      </div>
+
+      <button type="button" (click)="restartGame()">New Game</button>
+    </header>
+
+    <section class="board-arena" aria-label="Computer game board">
+      <article class="corner-player player-x" [class.active]="currentTurn === playerMark && !gameOver">
+        <span class="mark x">X</span>
+        <div>
+          <strong>You</strong>
+          <p>Score {{ playerScore }}</p>
+        </div>
+      </article>
+
+      <article class="corner-player player-o" [class.active]="currentTurn === computerMark && !gameOver">
+        <span class="mark o">O</span>
+        <div>
+          <strong>Computer</strong>
+          <p>Score {{ computerScore }}</p>
+        </div>
+      </article>
+
+      <div class="board" aria-label="Tic tac toe board">
+        <button
+          *ngFor="let cell of board; let i = index; trackBy: trackCell"
+          type="button"
+          class="cell"
+          [ngClass]="{ 'x-mark': cell === 'X', 'o-mark': cell === 'O' }"
+          [disabled]="!!cell || gameOver || currentTurn !== playerMark"
+          (click)="move(i)">
+          <span>{{ cell || '' }}</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="room-footer">
+      <span>Draws {{ draws }}</span>
+      <span>{{ gameOver ? 'Game complete' : 'Match in progress' }}</span>
+    </footer>
+  </section>
+</main>
