@@ -3,7 +3,7 @@ export const environment = {
   apiBaseUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/api',
   signalRHubUrl: 'https://tictactoearena-c4egcydkc9hpb7ct.centralindia-01.azurewebsites.net/gamehub',
   googleAds: {
-    enabled: false,
+    enabled: true,
     client: 'ca-pub-2469629589146137',
     slots: {
       banner: '7334870582'

@@ -52,6 +52,37 @@ h1 {
   gap: 12px;
 }
 
+.review-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.review-notes article {
+  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.review-notes h2,
+.review-notes p {
+  margin: 0;
+}
+
+.review-notes h2 {
+  color: #172033;
+  font-size: 1rem;
+}
+
+.review-notes p {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 .start-button,
 .download-button {
   display: inline-grid;
@@ -141,6 +172,10 @@ h1 {
   .start-button,
   .download-button {
     width: 100%;
+  }
+
+  .review-notes {
+    grid-template-columns: 1fr;
   }
 
   .preview-board {
