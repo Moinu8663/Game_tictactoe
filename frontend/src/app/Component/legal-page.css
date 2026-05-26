@@ -19,6 +19,99 @@
   overflow-y: auto;
 }
 
+.page-shell {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vh, 24px);
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+.page-panel {
+  width: min(980px, 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,250,251,0.96));
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 28px;
+  padding: clamp(26px, 4vh, 34px);
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.12);
+  color: #101827;
+}
+
+.page-panel h1 {
+  margin-top: 10px;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.05;
+}
+
+.lead {
+  margin: 20px 0 28px;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.75;
+  color: #475569;
+  max-width: 54rem;
+}
+
+.content-grid,
+.policy-stack {
+  display: grid;
+  gap: clamp(18px, 2.5vh, 24px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: clamp(24px, 4vh, 32px);
+}
+
+.content-grid article,
+.policy-stack article {
+  padding: clamp(22px, 3vh, 26px);
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.06);
+}
+
+.content-grid article h2,
+.policy-stack article h2 {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+
+.primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: #ffffff;
+  font-weight: 850;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.primary-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+  filter: saturate(1.05);
+}
+
+.primary-link:active {
+  transform: translateY(0);
+}
+
+.primary-link a,
+.primary-link {
+  color: inherit;
+}
+
+@media (max-width: 820px) {
+  .content-grid,
+  .policy-stack {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── game card ──────────────────────────────────────────────── */
 .game-card {
   width: min(980px, 100%);

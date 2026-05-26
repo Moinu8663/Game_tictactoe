@@ -22,11 +22,17 @@ export class Multiuser implements OnInit, OnDestroy {
   winner = '';
   playerX = '';
   playerO = '';
+  playerXScore = 0;
+  playerOScore = 0;
+  draws = 0;
   gameOver = false;
   statusMessage = '';
   connected = false;
   started = false;
   showWinnerPopup = false;
+  showInvitePopup = false;
+  roomInviteCode = '';
+  roomInviteMessage = '';
   lastEvent = '';
   lastEventTurn = '';
 
@@ -58,6 +64,11 @@ export class Multiuser implements OnInit, OnDestroy {
             this.lastEventTurn = room.currentTurn;
             this.updateRoom(room);
             this.statusMessage = `Player joined the room. ${room.currentTurn} starts. ${this.symbol === room.currentTurn ? 'Your move.' : 'Waiting for the opponent.'}`;
+            if (this.showInvitePopup && room.roomId === this.roomId) {
+              this.showInvitePopup = false;
+              this.roomInviteMessage = '';
+              this.roomInviteCode = '';
+            }
           });
         });
 
@@ -88,6 +99,13 @@ export class Multiuser implements OnInit, OnDestroy {
           });
         });
 
+        this.gameService.hubConnection.on('ReturnToLobby', () => {
+          this.runServerUpdate(() => {
+            this.statusMessage = 'A player left the room. Returning to lobby.';
+            this.resetLobby();
+          });
+        });
+
         this.gameService.hubConnection.on('Error', (error: string) => {
           this.runServerUpdate(() => {
             this.statusMessage = `Error: ${error}`;
@@ -115,6 +133,9 @@ export class Multiuser implements OnInit, OnDestroy {
         this.lastEvent = 'RoomCreated';
         this.lastEventTurn = room.currentTurn;
         this.updateRoom(room);
+        this.roomInviteCode = room.roomId;
+        this.roomInviteMessage = 'Waiting for opponent to join...';
+        this.showInvitePopup = true;
         this.statusMessage = `Room created. Share code ${room.roomId} with your opponent.`;
         this.cdr.markForCheck();
       })
@@ -197,6 +218,19 @@ export class Multiuser implements OnInit, OnDestroy {
     this.started = true;
   }
 
+  leaveRoom(): void {
+    if (!this.roomId) {
+      this.resetLobby();
+      return;
+    }
+
+    this.gameService.leaveRoom(this.roomId)
+      .catch(err => {
+        console.error(err);
+        this.resetLobby();
+      });
+  }
+
   closeWinnerPopup(): void {
     this.showWinnerPopup = false;
   }
@@ -211,7 +245,7 @@ export class Multiuser implements OnInit, OnDestroy {
 
   get gameStateLabel(): string {
     if (this.gameOver) {
-      return this.winner === 'Draw' ? 'Draw' : `${this.winner} wins`;
+      return this.winner === 'Draw' ? 'Draw' : `${this.winnerName} wins`;
     }
 
     if (!this.roomId) {
@@ -223,6 +257,18 @@ export class Multiuser implements OnInit, OnDestroy {
     }
 
     return `${this.currentTurn} to move`;
+  }
+
+  get winnerName(): string {
+    if (this.winner === 'X') {
+      return this.playerX || 'Player X';
+    }
+
+    if (this.winner === 'O') {
+      return this.playerO || 'Player O';
+    }
+
+    return '';
   }
 
   private runServerUpdate(update: () => void): void {
@@ -240,6 +286,9 @@ export class Multiuser implements OnInit, OnDestroy {
     this.winner = room.winner;
     this.playerX = room.playerX ?? '';
     this.playerO = room.playerO ?? '';
+    this.playerXScore = room.playerXScore ?? 0;
+    this.playerOScore = room.playerOScore ?? 0;
+    this.draws = room.draws ?? 0;
 
     const normalizedPlayerName = this.playerName.trim().toLowerCase();
     const playerX = room.playerX?.trim().toLowerCase() ?? '';
@@ -254,6 +303,23 @@ export class Multiuser implements OnInit, OnDestroy {
     }
 
     this.showWinnerPopup = room.gameOver && !!room.winner;
+  }
+
+  private resetLobby(): void {
+    this.roomId = '';
+    this.symbol = '';
+    this.board = Array(9).fill(null);
+    this.currentTurn = 'X';
+    this.winner = '';
+    this.playerX = '';
+    this.playerO = '';
+    this.playerXScore = 0;
+    this.playerOScore = 0;
+    this.draws = 0;
+    this.showInvitePopup = false;
+    this.roomInviteCode = '';
+    this.roomInviteMessage = '';
+    this.gameOver = false;
   }
 
 }

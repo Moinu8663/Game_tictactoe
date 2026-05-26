@@ -84,6 +84,17 @@ public class GameController : ControllerBase
         return Ok(room);
     }
 
+    [HttpPost("rooms/{roomId}/leave")]
+    public async Task<ActionResult> LeaveRoom(string roomId)
+    {
+        var room = _gameService.GetRoom(roomId);
+        if (room is null)
+            return NotFound("Room not found.");
+
+        await _hubContext.Clients.Group(roomId).SendAsync("ReturnToLobby");
+        return Ok();
+    }
+
     private async Task AddConnectionToRoomGroup(string? connectionId, string roomId)
     {
         if (!string.IsNullOrWhiteSpace(connectionId))

@@ -6,4 +6,7 @@ export interface GameRoom {
   currentTurn: string;
   gameOver: boolean;
   winner: string;
+  playerXScore?: number;
+  playerOScore?: number;
+  draws?: number;
 }

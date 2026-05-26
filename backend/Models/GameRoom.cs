@@ -11,5 +11,8 @@ public class GameRoom
     public string CurrentTurn { get; set; } = "X";
     public bool GameOver { get; set; }
     public string Winner { get; set; } = string.Empty;
+    public int PlayerXScore { get; set; }
+    public int PlayerOScore { get; set; }
+    public int Draws { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

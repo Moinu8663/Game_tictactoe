@@ -58,6 +58,19 @@ public class GameHub : Hub
         await Clients.Group(roomId).SendAsync("MoveMade", room);
     }
 
+    public async Task LeaveRoom(string roomId)
+    {
+        var room = _gameService.GetRoom(roomId);
+        if (room is null)
+        {
+            await Clients.Caller.SendAsync("Error", "Room not found.");
+            return;
+        }
+
+        await Clients.Group(roomId).SendAsync("ReturnToLobby");
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
+    }
+
     public async Task RestartGame(string roomId, string playerName)
     {
         var room = _gameService.RestartRoom(roomId, playerName);

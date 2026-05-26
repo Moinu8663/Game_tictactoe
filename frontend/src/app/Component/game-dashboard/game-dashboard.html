@@ -1,8 +1,9 @@
 <main class="dashboard-shell">
   <header class="dashboard-header">
-    <div>
+    <div class="dashboard-intro">
       <p class="eyebrow">Choose Game Type</p>
       <h1>Game Dashboard</h1>
+      <p class="lead">Pick a mode to start your next Tic Tac Toe match. Play online with a friend, take on the AI, or share the board locally.</p>
     </div>
 
     <a class="home-button" routerLink="/home">Home</a>
@@ -10,21 +11,45 @@
 
   <section class="mode-grid" aria-label="Game modes">
     <a class="mode-card online" routerLink="/multiuser">
-      <span class="mode-icon">ON</span>
+      <div class="card-top">
+        <span class="mode-icon">ON</span>
+        <span class="mode-badge">Multiplayer</span>
+      </div>
       <strong>Online With Friend</strong>
       <p>Create or join a room and play with a friend over the network.</p>
+      <div class="card-features">
+        <span>Live sync</span>
+        <span>Private room</span>
+        <span>Match history</span>
+      </div>
     </a>
 
     <a class="mode-card computer" routerLink="/comuser">
-      <span class="mode-icon">AI</span>
+      <div class="card-top">
+        <span class="mode-icon">AI</span>
+        <span class="mode-badge">Solo</span>
+      </div>
       <strong>With Computer</strong>
       <p>Play against the computer for a quick solo challenge.</p>
+      <div class="card-features">
+        <span>Smart AI</span>
+        <span>Practice mode</span>
+        <span>Instant play</span>
+      </div>
     </a>
 
     <a class="mode-card offline" routerLink="/singleuser">
-      <span class="mode-icon">2P</span>
+      <div class="card-top">
+        <span class="mode-icon">2P</span>
+        <span class="mode-badge">Local</span>
+      </div>
       <strong>Offline With Friend</strong>
       <p>Share the same screen and take turns locally.</p>
+      <div class="card-features">
+        <span>Same device</span>
+        <span>Quick setup</span>
+        <span>Scoreboard</span>
+      </div>
     </a>
   </section>
 </main>

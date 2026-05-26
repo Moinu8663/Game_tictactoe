@@ -91,11 +91,16 @@ public class GameService
             if (!string.IsNullOrEmpty(room.Winner))
             {
                 room.GameOver = true;
+                if (room.Winner == "X")
+                    room.PlayerXScore++;
+                else if (room.Winner == "O")
+                    room.PlayerOScore++;
             }
             else if (room.Board.All(cell => cell is not null))
             {
                 room.GameOver = true;
                 room.Winner = "Draw";
+                room.Draws++;
             }
             else
             {

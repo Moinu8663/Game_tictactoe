@@ -76,6 +76,12 @@ export class GameService {
     );
   }
 
+  leaveRoom(roomId: string): Promise<void> {
+    return firstValueFrom(
+      this.http.post<void>(`${this.apiUrl}/rooms/${roomId}/leave`, {})
+    );
+  }
+
   restartGame(roomId: string, playerName: string): Promise<GameRoom> {
     return firstValueFrom(
       this.http.post<GameRoom>(`${this.apiUrl}/rooms/${roomId}/restart`, { playerName })

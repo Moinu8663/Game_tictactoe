@@ -34,13 +34,13 @@
 }
 
 .site-footer a {
-  color: #334155;
+  color: #030305;
   font-size: 0.92rem;
   font-weight: 750;
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #0f766e;
+  color: #3119bd;
   text-decoration: underline;
 }
